@@ -21,7 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene(named: "art.scnassets/diceCollada.scn")!
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -33,7 +33,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
 
-        // Run the view's session
+        // Run the view's 	session
         sceneView.session.run(configuration)
     }
     
