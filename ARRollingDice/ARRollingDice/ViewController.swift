@@ -54,6 +54,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
+    // Detecting touches on screen and translate them into locations
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            // Get the 2D location of the screen touch
+            let touchLocation = touch.location(in: sceneView)
+            
+            // Convert 2D location on screen into 3D location in scen view
+            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+            
+            // Check if the touch is on the the plane
+            if !results.isEmpty {
+                print("Touched the plane")
+            } else {
+                print("Didn't touch the plane, it might be somewhere else")
+            }
+        }
+    }
+    
     // Call this method when detected a horizontal surface
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if anchor is ARPlaneAnchor {
@@ -70,7 +88,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             // Add a grid to the detected plane
             let gridMaterial = SCNMaterial()
-            gridMaterial.diffuse.contents = UIImage(named: "art.scnasserts/grid.png")
+            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
             plane.materials = [gridMaterial]
             planeNode.geometry = plane
             
