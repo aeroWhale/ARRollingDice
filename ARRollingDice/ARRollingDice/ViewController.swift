@@ -73,7 +73,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     // Set postion for the dice, based on the hit result of touch
                     diceNode.position = SCNVector3(
                         x: hitResult.worldTransform.columns.3.x,
-                        y: hitResult.worldTransform.columns.3.y,
+                        // Add radius of the dice's bounding sphere, so that it can be displayed above the plane.
+                        y: hitResult.worldTransform.columns.3.y + diceNode.boundingSphere.radius,
                         z: hitResult.worldTransform.columns.3.z
                     )
                     sceneView.scene.rootNode.addChildNode(diceNode)
